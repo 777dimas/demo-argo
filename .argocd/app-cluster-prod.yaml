@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-prod
+  namespace: argocd
+spec:
+  destination:
+    server: https://<cluster1-api-server-url>
+    namespace: my-app
+  source:
+    repoURL: 'https://github.com/777dimas/demo-app.git'
+    targetRevision: HEAD
+    path: overlays/prod
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
